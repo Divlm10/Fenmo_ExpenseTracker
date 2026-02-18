@@ -11,13 +11,17 @@ const app=express();
 const PORT= process.env.PORT || 5000;
 
 // app.use(cors());
+import cors from "cors";
+
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://fenmo-expense-tracker-iota.vercel.app/"
+    "https://fenmo-expense-tracker-iota.vercel.app"
   ],
+  methods: ["GET", "POST"],
   credentials: true
 }));
+
 
 app.use(express.json());
 
