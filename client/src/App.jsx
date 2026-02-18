@@ -50,19 +50,24 @@ function App() {
     <div className="container">
       <h1>Expense Tracker</h1>
 
-      <ExpenseForm onExpenseCreated={loadExpenses} />
+      <section>
+    <ExpenseForm onExpenseCreated={loadExpenses} />
+    </section>
+
 
       <hr style={{ margin: "30px 0" }} />
 
-      <ExpenseList
-        expenses={expenses}
-        loading={loading}
-        error={error}
-        filterCategory={filterCategory}
-        setFilterCategory={setFilterCategory}
-        sortByDate={sortByDate}
-        setSortByDate={setSortByDate}
-      />
+      <section>
+    <ExpenseList
+      expenses={expenses}
+      loading={loading}
+      error={error}
+      filterCategory={filterCategory}
+      setFilterCategory={setFilterCategory}
+      sortByDate={sortByDate}
+      setSortByDate={setSortByDate}
+    />
+  </section>
     </div>
   );
 }

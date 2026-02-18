@@ -22,7 +22,12 @@ body {
 
 /* Headings */
 h1 {
-  margin-bottom: 20px;
+  text-align: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 2000;
+  text-decoration:underline;
+  margin-bottom: 30px;
+  color: #333;
 }
 
 h2 {
@@ -97,4 +102,46 @@ li {
 .error {
   color: red;
   margin-top: 10px;
+}
+/* Expense table */
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.expense-table th,
+.expense-table td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.expense-table th {
+  background-color: #f9fafb;
+  font-weight: 600;
+}
+
+.expense-table tr:hover {
+  background-color: #f4f6f8;
+}
+
+/* Better filter section */
+.filter-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Improve inputs */
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+}
+
+/* Section spacing */
+section {
+  margin-bottom: 30px;
 }

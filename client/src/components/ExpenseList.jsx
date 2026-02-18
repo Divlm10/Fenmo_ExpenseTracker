@@ -49,18 +49,30 @@ function ExpenseList({
 
       {!loading && expenses.length > 0 && (
         <>
-          <ul>
-            {expenses.map((exp) => (
-              <li key={exp.id} style={{ marginBottom: "8px" }}>
-                ₹{(exp.amount / 100).toFixed(2)} |{" "}
-                <strong>{exp.category}</strong> |{" "}
-                {exp.description || "-"} |{" "}
-                {exp.date}
-              </li>
-            ))}
-          </ul>
+          <table className="expense-table">
+      <thead>
+        <tr>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {expenses.map((exp) => (
+          <tr key={exp.id}>
+            <td>₹{(exp.amount / 100).toFixed(2)}</td>
+            <td>{exp.category}</td>
+            <td>{exp.description || "-"}</td>
+            <td>{exp.date}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
 
-          <h3>Total: ₹{(total / 100).toFixed(2)}</h3>
+    <div className="total">
+      Total: ₹{(total / 100).toFixed(2)}
+    </div>
         </>
       )}
     </div>
