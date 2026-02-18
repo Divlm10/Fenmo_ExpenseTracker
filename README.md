@@ -4,7 +4,7 @@ Expense Tracker – Full Stack (PERN)
 
 This is a minimal full-stack expense tracking application built as part of a time-bound assessment.
 
-The goal was to build something small but production-minded — focusing on correctness, data safety, and real-world behavior rather than adding too many features.
+The goal was to build something small but production-minded, focusing on correctness, data safety, and real-world behavior rather than adding too many features.
 
 
 OVERVIEW:
@@ -87,7 +87,7 @@ Amounts are stored as integer paise, not floating point values.
 
 Example:
 
-₹120.50 → stored as 12050
+₹120.50 => stored as 12050
 Floating point numbers can introduce precision errors when dealing with money. Storing currency as the smallest unit (paise) avoids rounding issues and is a safer long-term approach.
 
 
