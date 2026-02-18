@@ -1,35 +1,70 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import { fetchExpenses } from "./utils/api.js";
+import ExpenseForm from "./components/ExpenseForm.jsx";
+import ExpenseList from "./components/ExpenseList.jsx";
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [expenses, setExpenses] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const [filterCategory, setFilterCategory] = useState("");
+  const [sortByDate, setSortByDate] = useState(false);
+
+  //query string based on filter + sort
+  const buildQuery = () => {
+    const params = [];
+
+    if (filterCategory) {
+      params.push(`category=${filterCategory}`);
+    }
+
+    if (sortByDate) {
+      params.push("sort=date_desc");
+    }
+
+    return params.length > 0 ? `?${params.join("&")}` : "";
+  };
+
+  const loadExpenses = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const data = await fetchExpenses(buildQuery());
+      setExpenses(data);
+    } catch (err) {
+      setError("Failed to load expenses",err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  
+  useEffect(() => {
+    loadExpenses();
+  }, [filterCategory, sortByDate]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="container">
+      <h1>Expense Tracker</h1>
+
+      <ExpenseForm onExpenseCreated={loadExpenses} />
+
+      <hr style={{ margin: "30px 0" }} />
+
+      <ExpenseList
+        expenses={expenses}
+        loading={loading}
+        error={error}
+        filterCategory={filterCategory}
+        setFilterCategory={setFilterCategory}
+        sortByDate={sortByDate}
+        setSortByDate={setSortByDate}
+      />
+    </div>
+  );
 }
 
-export default App
+export default App;
