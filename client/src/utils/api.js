@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = "https://fenmo-expensetracker.onrender.com";
 
 export const fetchExpenses = async (query = "") => {
   const res = await fetch(`${API_URL}/expenses${query}`);
